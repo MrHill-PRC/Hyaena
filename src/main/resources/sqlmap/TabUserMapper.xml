@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springmvc.dao.TabUserMapper" >
+  <resultMap id="BaseResultMap" type="com.springmvc.entity.TabUser" >
+    <id column="S_ID" property="sId" jdbcType="VARCHAR" />
+    <result column="S_NAME" property="sName" jdbcType="VARCHAR" />
+    <result column="DT_ESTABLISH" property="dtEstablish" jdbcType="BIGINT" />
+    <result column="S_PASSWORD" property="sPassword" jdbcType="VARCHAR" />
+    <result column="I_LEVEL" property="iLevel" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    S_ID, S_NAME, DT_ESTABLISH, S_PASSWORD, I_LEVEL
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TAB_USER
+    where S_ID = #{sId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TAB_USER
+    where S_ID = #{sId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.springmvc.entity.TabUser" >
+    insert into TAB_USER (S_ID, S_NAME, DT_ESTABLISH, 
+      S_PASSWORD, I_LEVEL)
+    values (#{sId,jdbcType=VARCHAR}, #{sName,jdbcType=VARCHAR}, #{dtEstablish,jdbcType=BIGINT}, 
+      #{sPassword,jdbcType=VARCHAR}, #{iLevel,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.springmvc.entity.TabUser" >
+    insert into TAB_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sId != null" >
+        S_ID,
+      </if>
+      <if test="sName != null" >
+        S_NAME,
+      </if>
+      <if test="dtEstablish != null" >
+        DT_ESTABLISH,
+      </if>
+      <if test="sPassword != null" >
+        S_PASSWORD,
+      </if>
+      <if test="iLevel != null" >
+        I_LEVEL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sId != null" >
+        #{sId,jdbcType=VARCHAR},
+      </if>
+      <if test="sName != null" >
+        #{sName,jdbcType=VARCHAR},
+      </if>
+      <if test="dtEstablish != null" >
+        #{dtEstablish,jdbcType=BIGINT},
+      </if>
+      <if test="sPassword != null" >
+        #{sPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="iLevel != null" >
+        #{iLevel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.springmvc.entity.TabUser" >
+    update TAB_USER
+    <set >
+      <if test="sName != null" >
+        S_NAME = #{sName,jdbcType=VARCHAR},
+      </if>
+      <if test="dtEstablish != null" >
+        DT_ESTABLISH = #{dtEstablish,jdbcType=BIGINT},
+      </if>
+      <if test="sPassword != null" >
+        S_PASSWORD = #{sPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="iLevel != null" >
+        I_LEVEL = #{iLevel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where S_ID = #{sId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.springmvc.entity.TabUser" >
+    update TAB_USER
+    set S_NAME = #{sName,jdbcType=VARCHAR},
+      DT_ESTABLISH = #{dtEstablish,jdbcType=BIGINT},
+      S_PASSWORD = #{sPassword,jdbcType=VARCHAR},
+      I_LEVEL = #{iLevel,jdbcType=INTEGER}
+    where S_ID = #{sId,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selctByPrimary" parameterType="com.springmvc.entity.TabUser" resultType="com.springmvc.entity.TabUser">
+    select
+    <include refid="Base_Column_List" />
+    from
+    TAB_USER
+    where 1=1
+    <if test="sName != null">
+     AND S_NAME = #{sName,jdbcType=VARCHAR}
+    </if>
+    <if test="sPassword != null" >
+      AND S_PASSWORD = #{sPassword,jdbcType=VARCHAR}
+    </if>
+
+  </select>
+</mapper>

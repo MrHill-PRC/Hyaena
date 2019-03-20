@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Hyaena:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>Hyaena</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="Hyaena.war">
+      <element id="artifact" artifact-name="Hyaena:war exploded" />
+    </root>
+  </artifact>
+</component>
